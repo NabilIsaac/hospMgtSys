@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
+use App\Models\DoctorType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DoctorController extends Controller
 {
@@ -11,9 +15,27 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected function validator(Request $request)
+    {
+        $rules = [
+            'doctor_type_id' => 'required',
+            'name' => 'required|string|max:225',
+            'phone' => 'required',
+            'email' => 'nullable|email|max:64',
+            'specialization' => 'required',
+            'brief_history' => 'nullable',
+            'home_address' => 'required',
+        ];
+
+        return Validator::make($request->all(), $rules, []);
+    }
+
     public function index()
     {
-        return view('doctor.index');
+        $doctors = Doctor::all();
+        $doctor_types = DoctorType::all();
+        return view('doctor.index', compact('doctor_types', 'doctors'));
     }
 
     /**
@@ -23,7 +45,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        $doctor_types = DoctorType::all();
+        return view('doctor.create', compact('doctor_types'));
     }
 
     /**
@@ -34,7 +57,38 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            // Start Db transaction
+            DB::beginTransaction();
+
+            // Validate incoming request
+            $validation = $this->validator($request);
+            if ($validation->fails()) {
+                return response($validation->errors(), 400);
+            }
+
+            $doctor = new Doctor();
+            $doctor->name = $request->name;
+            $doctor->doctor_type_id = $request->doctor_type_id;
+            $doctor->phone = $request->phone;
+            $doctor->email = $request->email;
+            $doctor->specialization = $request->specialization;
+            $doctor->brief_history = $request->brief_history;
+            $doctor->home_address = $request->home_address;
+            $doctor->save();
+
+            DB::commit();
+
+            DB::commit();
+            $request->session()->flash('successful', "New doctor was created successfully!");
+            return redirect()->route('doctors.index');
+
+        }catch(\Exception $error){
+            DB::rollBack();
+            return $error;
+            $request->session()->flash('error', "doctor creation failed!");
+            return redirect()->back();
+        }
     }
 
     /**

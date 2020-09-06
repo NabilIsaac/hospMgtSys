@@ -21,7 +21,7 @@
                     <a href="{{ route('drugs.index') }}"><i class="menu-icon fa fa-medkit"></i>Drugs </a>
                 </li>
                 <li class="{{ (request()->is('prescriptions*')) ? 'active' : ''  }} ">
-                    <a href="{{ route('prescriptions.index') }}"><i class="menu-icon fa  fa-plus-square"></i>Receptionists </a>
+                    <a href="{{ route('prescriptions.index') }}"><i class="menu-icon fa  fa-plus-square"></i>Prescriptions </a>
                 </li>
                 <li class="{{ (request()->is('appointments*')) ? 'active' : ''  }} ">
                     <a href="{{ route('appointments.index') }}"><i class="menu-icon fa  fa-comment"></i>Appointments </a>
