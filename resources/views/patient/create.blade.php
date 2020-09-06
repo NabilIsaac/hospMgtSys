@@ -2,59 +2,159 @@
 
 @section('content')
 
-<div class="col-lg-6">
+<div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <strong>Basic Form</strong> Elements
+            <strong>Create Patient</strong>
         </div>
         <div class="card-body card-block">
-            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
-                <div class="row form-group">
-                    <div class="col col-md-3"><label class=" form-control-label">Static</label></div>
-                    <div class="col-12 col-md-9">
-                        <p class="form-control-static">Username</p>
+            <form action="{{ route('patients.store') }}" method="POST"  class="form-horizontal">
+                @csrf
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Full name</label>
+                            <input type="text" id="text-input" name="fullname" placeholder="full name" class="form-control shadow-none">
+                        </div>
                     </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Text Input</label></div>
-                    <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="email-input" class=" form-control-label">Email Input</label></div>
-                    <div class="col-12 col-md-9"><input type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="password-input" class=" form-control-label">Password</label></div>
-                    <div class="col-12 col-md-9"><input type="password" id="password-input" name="password-input" placeholder="Password" class="form-control"><small class="help-block form-text">Please enter a complex password</small></div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Disabled Input</label></div>
-                    <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled="" class="form-control"></div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Textarea</label></div>
-                    <div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control"></textarea></div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-3"><label for="select" class=" form-control-label">Select</label></div>
-                    <div class="col-12 col-md-9">
-                        <select name="select" id="select" class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="1">Option #1</option>
-                            <option value="2">Option #2</option>
-                            <option value="3">Option #3</option>
+
+                    <div class="col-lg-6">
+                        <label class="form-control-label">Doctor</label>
+                        <select name="doctor_id" class="form-control shadow-none">
+                            <option> Select Doctor  </option>
+                            @foreach ($doctors as $doctor)
+                                <option value="{{ $doctor->id }}"> {{ $doctor->name }} </option>
+                            @endforeach
                         </select>
+                        @if ($errors->has('doctor_id'))
+                        <div class="error">
+                            {{ $errors->first('doctor_id') }}
+                        </div>
+                        @endif
                     </div>
+                    <div class="col-lg-6">
+                        <label class="form-control-label">Ward</label>
+                        <select name="ward_id" class="form-control shadow-none">
+                            <option> Select Ward  </option>
+                            @foreach ($wards as $ward)
+                                <option value="{{ $ward->id }}"> {{ $ward->name }} </option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('ward_id'))
+                        <div class="error">
+                            {{ $errors->first('ward_id') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-control-label">Room</label>
+                        <select name="room_id" class="form-control shadow-none">
+                            <option> Select Room  </option>
+                            @foreach ($rooms as $room)
+                                <option value="{{ $room->id }}"> {{ $room->room_type }} </option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('room_id'))
+                        <div class="error">
+                            {{ $errors->first('room_id') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Phone</label>
+                            <input type="text" id="text-input" name="phone" placeholder="phone" class="form-control shadow-none">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Email</label>
+                            <input type="text" id="text-input" name="email" placeholder="email" class="form-control shadow-none">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Gender</label>
+                            <select name="gender" class="form-control">
+                                <option value="male"> Male </option>
+                                <option value="female"> Female </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Age</label>
+                            <input type="number" name="age" placeholder="age" class="form-control shadow-none">
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Created by</label>
+                            <input type="text" name="created_by" placeholder="created by" class="form-control shadow-none">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Insurance</label>
+                            <input type="text" name="insurance" placeholder="insurance" class="form-control shadow-none">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Status</label>
+                            <select name="status" class="form-control">
+                                <option value="admission"> Admission </option>
+                                <option value="discharge"> Discharge </option>
+                                <option value="consultation"> Consultation </option>
+                                <option value="emergency"> Emergency </option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Next of kin</label>
+                            <input type="text" name="next_of_kin" placeholder="next of kin" class="form-control shadow-none">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Marital Status</label>
+                            <select name="marital_status" class="form-control">
+                                <option value="single"> Single </option>
+                                <option value="divorced"> Divorced </option>
+                                <option value="married"> Married </option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Disease</label>
+                            <input type="text" name="disease" placeholder="disease" class="form-control shadow-none">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class=" form-control-label">Home Address</label>
+                            <input type="text" name="home_address" placeholder="home address" class="form-control shadow-none">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <a href="{{ route('patients.index') }}" class="btn btn-danger btn-sm">Cancel</a>
+                    
                 </div>
             </form>
-        </div>
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary btn-sm">
-                <i class="fa fa-dot-circle-o"></i> Submit
-            </button>
-            <button type="reset" class="btn btn-danger btn-sm">
-                <i class="fa fa-ban"></i> Reset
-            </button>
         </div>
     </div>
 </div>
