@@ -26,3 +26,7 @@ Route::resource('appointments', 'AppointmentController');
 Route::resource('prescriptions', 'PrescriptionController');
 Route::resource('receptionists', 'ReceptionistController');
 Route::resource('doctors', 'DoctorController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
