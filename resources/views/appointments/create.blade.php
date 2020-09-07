@@ -5,10 +5,10 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <strong>Create Prescription</strong>
+            <strong>Create Appointment</strong>
         </div>
         <div class="card-body card-block">
-            <form action="{{ route('prescriptions.store') }}" method="POST"  class="form-horizontal">
+            <form action="{{ route('appointments.store') }}" method="POST"  class="form-horizontal">
                 @csrf
                 <div class="row">
                     <div class="col-lg-6">
@@ -42,26 +42,9 @@
                     </div>
                     
                     <div class="col-lg-6">
-                        <label class="form-control-label">Drug</label>
-                        <select name="drug_id" class="form-control shadow-none">
-                            <option> Select Drug  </option>
-                            @foreach ($drugs as $drug)
-                                <option value="{{ $drug->id }}"> {{ $drug->drug_name }} </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('drug_id'))
-                        <div class="error">
-                            {{ $errors->first('drug_id') }}
-                        </div>
-                        @endif
-                    </div>
-                    
-                    
-                    
-                    <div class="col-lg-6">
                         <div class="form-group">
-                            <label class=" form-control-label">Dose</label>
-                            <input type="text" name="dose" placeholder="dose" class="form-control shadow-none">
+                            <label class=" form-control-label">Date</label>
+                            <input type="date" name="appointment_date" placeholder="date" class="form-control shadow-none">
                         </div>
                     </div>
                     
@@ -70,7 +53,7 @@
                     <button type="submit" class="btn btn-primary btn-sm">
                         <i class="fa fa-dot-circle-o"></i> Submit
                     </button>
-                    <a href="{{ route('prescriptions.index') }}" class="btn btn-danger btn-sm">Cancel</a>
+                    <a href="{{ route('appointments.index') }}" class="btn btn-danger btn-sm">Cancel</a>
                     
                 </div>
             </form>

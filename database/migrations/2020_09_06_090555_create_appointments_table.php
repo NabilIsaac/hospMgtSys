@@ -18,6 +18,7 @@ class CreateAppointmentsTable extends Migration
             $table->foreignId('doctor_id');
             $table->foreignId('patient_id');
             $table->date('appointment_date');
+            // $table->string('comments')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -26,6 +26,15 @@
                 <li class="{{ (request()->is('appointments*')) ? 'active' : ''  }} ">
                     <a href="{{ route('appointments.index') }}"><i class="menu-icon fa  fa-comment"></i>Appointments </a>
                 </li>
+                <li class="{{ (request()->is('rooms*')) ? 'active' : ''  }} ">
+                    <a href="{{ route('rooms.index') }}"><i class="menu-icon fa  fa-home"></i>Rooms </a>
+                </li>
+                <li class="{{ (request()->is('wards*')) ? 'active' : ''  }} ">
+                    <a href="{{ route('wards.index') }}"><i class="menu-icon fa  fa-hospital-o"></i>Wards </a>
+                </li>
+                <li class="{{ (request()->is('examinations*')) ? 'active' : ''  }} ">
+                    <a href="{{ route('examinations.index') }}"><i class="menu-icon fa  fa-stethoscope"></i>Examinations </a>
+                </li>
 
                 {{-- <li class="menu-item-has-children dropdown {{ (request()->is('patients*')) ? 'active' : ''  }} ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Patients</a>

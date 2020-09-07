@@ -2,10 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
+use App\Models\Doctor;
+use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
+
+    protected function validator(Request $request)
+    {
+        $rules = [
+            'patient_id' => 'required',
+            'doctor_id' => 'required',
+            'appointment_date' => 'required',
+        ];
+
+        return Validator::make($request->all(), $rules, []);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +32,10 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return view('appointment.index');
+        $appointments = Appointment::all();
+        $doctors = Doctor::all();
+        $patients = Patient::all();
+        return view('appointments.index', compact('appointments', 'doctors', 'patients'));
     }
 
     /**
@@ -23,7 +45,10 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
+        $appointments = Appointment::all();
+        $doctors = Doctor::all();
+        $patients = Patient::all();
+        return view('appointments.create', compact('appointments', 'doctors', 'patients'));
     }
 
     /**
@@ -34,7 +59,32 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            // Start Db transaction
+            DB::beginTransaction();
+
+            // Validate incoming request
+            $validation = $this->validator($request);
+            if ($validation->fails()) {
+                return response($validation->errors(), 400);
+            }
+
+            $appointment = new Appointment();
+            $appointment->patient_id = $request->patient_id;
+            $appointment->doctor_id = $request->doctor_id;
+            $appointment->appointment_date = $request->appointment_date;
+            $appointment->save();
+
+            DB::commit();
+            $request->session()->flash('successful', "New appointment was created successfully!");
+            return redirect()->route('appointments.index');
+
+        }catch(\Exception $error){
+            DB::rollBack();
+            return $error;
+            $request->session()->flash('error', "Appointment creation failed!");
+            return redirect()->back();
+        } 
     }
 
     /**

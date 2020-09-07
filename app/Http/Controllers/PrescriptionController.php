@@ -2,10 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
+use App\Models\Drug;
+use App\Models\Patient;
+use App\Models\Prescription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PrescriptionController extends Controller
 {
+
+    protected function validator(Request $request)
+    {
+        $rules = [
+            'patient_id' => 'required',
+            'doctor_id' => 'required',
+            'drug_id' => 'required',
+            'dose' => 'nullable',
+        ];
+
+        return Validator::make($request->all(), $rules, []);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +32,11 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        return view('prescription.index');
+        $prescriptions = Prescription::all();
+        $doctors = Doctor::all();
+        $patients = Patient::all();
+        $drugs = Drug::all();
+        return view('prescription.index', compact('prescriptions', 'doctors', 'patients', 'drugs'));
     }
 
     /**
@@ -23,7 +46,11 @@ class PrescriptionController extends Controller
      */
     public function create()
     {
-        //
+        $prescriptions = Prescription::all();
+        $doctors = Doctor::all();
+        $patients = Patient::all();
+        $drugs = Drug::all();
+        return view('prescription.create', compact('prescriptions', 'doctors', 'patients', 'drugs'));
     }
 
     /**
@@ -34,7 +61,33 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            // Start Db transaction
+            DB::beginTransaction();
+
+            // Validate incoming request
+            $validation = $this->validator($request);
+            if ($validation->fails()) {
+                return response($validation->errors(), 400);
+            }
+
+            $prescription = new Prescription();
+            $prescription->patient_id = $request->patient_id;
+            $prescription->doctor_id = $request->doctor_id;
+            $prescription->drug_id = $request->drug_id;
+            $prescription->dose = $request->dose;
+            $prescription->save();
+
+            DB::commit();
+            $request->session()->flash('successful', "New prescription was created successfully!");
+            return redirect()->route('prescriptions.index');
+
+        }catch(\Exception $error){
+            DB::rollBack();
+            return $error;
+            $request->session()->flash('error', "Prescription creation failed!");
+            return redirect()->back();
+        } 
     }
 
     /**

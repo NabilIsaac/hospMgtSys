@@ -5,23 +5,23 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <strong>Create Prescription</strong>
+            <strong>Create Examination</strong>
         </div>
         <div class="card-body card-block">
-            <form action="{{ route('prescriptions.store') }}" method="POST"  class="form-horizontal">
+            <form action="{{ route('examinations.store') }}" method="POST"  class="form-horizontal">
                 @csrf
                 <div class="row">
                     <div class="col-lg-6">
-                        <label class="form-control-label">Doctor</label>
-                        <select name="doctor_id" class="form-control shadow-none">
-                            <option> Select Doctor  </option>
-                            @foreach ($doctors as $doctor)
-                                <option value="{{ $doctor->id }}"> {{ $doctor->name }} </option>
+                        <label class="form-control-label">Nurse</label>
+                        <select name="nurse_id" class="form-control shadow-none">
+                            <option> Select Nurse  </option>
+                            @foreach ($nurses as $nurse)
+                                <option value="{{ $nurse->id }}"> {{ $nurse->name }} </option>
                             @endforeach
                         </select>
-                        @if ($errors->has('doctor_id'))
+                        @if ($errors->has('nurse_id'))
                         <div class="error">
-                            {{ $errors->first('doctor_id') }}
+                            {{ $errors->first('nurse_id') }}
                         </div>
                         @endif
                     </div>
@@ -42,26 +42,15 @@
                     </div>
                     
                     <div class="col-lg-6">
-                        <label class="form-control-label">Drug</label>
-                        <select name="drug_id" class="form-control shadow-none">
-                            <option> Select Drug  </option>
-                            @foreach ($drugs as $drug)
-                                <option value="{{ $drug->id }}"> {{ $drug->drug_name }} </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('drug_id'))
-                        <div class="error">
-                            {{ $errors->first('drug_id') }}
+                        <div class="form-group">
+                            <label class=" form-control-label">Symptoms</label>
+                            <input type="text" name="symptoms" placeholder="symptoms" class="form-control shadow-none">
                         </div>
-                        @endif
                     </div>
-                    
-                    
-                    
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class=" form-control-label">Dose</label>
-                            <input type="text" name="dose" placeholder="dose" class="form-control shadow-none">
+                            <label class=" form-control-label">Comment</label>
+                            <input type="text" name="comment" placeholder="comment" class="form-control shadow-none">
                         </div>
                     </div>
                     
@@ -70,7 +59,7 @@
                     <button type="submit" class="btn btn-primary btn-sm">
                         <i class="fa fa-dot-circle-o"></i> Submit
                     </button>
-                    <a href="{{ route('prescriptions.index') }}" class="btn btn-danger btn-sm">Cancel</a>
+                    <a href="{{ route('examinations.index') }}" class="btn btn-danger btn-sm">Cancel</a>
                     
                 </div>
             </form>
