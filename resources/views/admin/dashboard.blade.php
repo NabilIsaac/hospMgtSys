@@ -18,8 +18,8 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text">$<span class="count">23569</span></div>
-                                        <div class="stat-heading">Revenue</div>
+                                        <div class="stat-text"><span class="count">{{ $patients }}</span></div>
+                                        <div class="stat-heading">Patients</div>
                                     </div>
                                 </div>
                             </div>
@@ -36,8 +36,8 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">3435</span></div>
-                                        <div class="stat-heading">Sales</div>
+                                        <div class="stat-text"><span class="count">{{ $rooms }}</span></div>
+                                        <div class="stat-heading">Rooms</div>
                                     </div>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">349</span></div>
-                                        <div class="stat-heading">Templates</div>
+                                        <div class="stat-text"><span class="count">{{ $appointments }}</span></div>
+                                        <div class="stat-heading">Appointments</div>
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +72,8 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">2986</span></div>
-                                        <div class="stat-heading">Clients</div>
+                                        <div class="stat-text"><span class="count">{{ $doctors }}</span></div>
+                                        <div class="stat-heading">Doctors</div>
                                     </div>
                                 </div>
                             </div>

@@ -1,10 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\Doctor;
+use App\Models\Patient;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
-class WardController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +18,11 @@ class WardController extends Controller
      */
     public function index()
     {
-        return view('room.index');
+        $patients = Patient::count();
+        $rooms = Room::count();
+        $doctors = Doctor::count();
+        $appointments = Appointment::count();
+        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'appointments'));
     }
 
     /**

@@ -2,37 +2,37 @@
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="{{ (request()->is('dashboard*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/dashboard*')) ? 'active' : ''  }} ">
                     <a href="{{ route('dashboard') }}"><i class="menu-icon fa fa-bars"></i>Dashboard </a>
                 </li>
-                <li class="{{ (request()->is('patients*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/patients*')) ? 'active' : ''  }} ">
                     <a href="{{ route('patients.index') }}"><i class="menu-icon fa fa-wheelchair"></i>Patients </a>
                 </li>
-                <li class="{{ (request()->is('doctors*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/doctors*')) ? 'active' : ''  }} ">
                     <a href="{{ route('doctors.index') }}"><i class="menu-icon fa fa-user-md"></i>Doctors </a>
                 </li>
-                <li class="{{ (request()->is('receptionists*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/receptionists*')) ? 'active' : ''  }} ">
                     <a href="{{ route('receptionists.index') }}"><i class="menu-icon fa fa-user"></i>Receptionist </a>
                 </li>
-                <li class="{{ (request()->is('nurses*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/nurses*')) ? 'active' : ''  }} ">
                     <a href="{{ route('nurses.index') }}"><i class="menu-icon fa fa-user"></i>Nurses </a>
                 </li>
-                <li class="{{ (request()->is('drugs*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/drugs*')) ? 'active' : ''  }} ">
                     <a href="{{ route('drugs.index') }}"><i class="menu-icon fa fa-medkit"></i>Drugs </a>
                 </li>
-                <li class="{{ (request()->is('prescriptions*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/prescriptions*')) ? 'active' : ''  }} ">
                     <a href="{{ route('prescriptions.index') }}"><i class="menu-icon fa  fa-plus-square"></i>Prescriptions </a>
                 </li>
-                <li class="{{ (request()->is('appointments*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/appointments*')) ? 'active' : ''  }} ">
                     <a href="{{ route('appointments.index') }}"><i class="menu-icon fa  fa-comment"></i>Appointments </a>
                 </li>
-                <li class="{{ (request()->is('rooms*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/rooms*')) ? 'active' : ''  }} ">
                     <a href="{{ route('rooms.index') }}"><i class="menu-icon fa  fa-home"></i>Rooms </a>
                 </li>
-                <li class="{{ (request()->is('wards*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/wards*')) ? 'active' : ''  }} ">
                     <a href="{{ route('wards.index') }}"><i class="menu-icon fa  fa-hospital-o"></i>Wards </a>
                 </li>
-                <li class="{{ (request()->is('examinations*')) ? 'active' : ''  }} ">
+                <li class="{{ (request()->is('admin/examinations*')) ? 'active' : ''  }} ">
                     <a href="{{ route('examinations.index') }}"><i class="menu-icon fa  fa-stethoscope"></i>Examinations </a>
                 </li>
 

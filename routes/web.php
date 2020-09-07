@@ -14,22 +14,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/', function () {
-    return redirect()->route('dashboard');
-});
 
-Route::resource('patients', 'PatientController');
-Route::resource('nurses', 'NurseController');
-Route::resource('drugs', 'DrugController');
-Route::resource('appointments', 'AppointmentController');
-Route::resource('prescriptions', 'PrescriptionController');
-Route::resource('receptionists', 'ReceptionistController');
-Route::resource('doctors', 'DoctorController');
-Route::resource('examinations', 'ExaminationController');
-Route::resource('rooms', 'RoomController');
-Route::resource('wards', 'WardController');
+
+
+Route::group(['prefix'=>'admin', 'middleware'=>'auth', 'namespace'=>'admin'], function() {
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::resource('/patients', 'PatientController');
+    Route::resource('/nurses', 'NurseController');
+    Route::resource('/drugs', 'DrugController');
+    Route::resource('/appointments', 'AppointmentController');
+    Route::resource('/prescriptions', 'PrescriptionController');
+    Route::resource('/receptionists', 'ReceptionistController');
+    Route::resource('/doctors', 'DoctorController');
+    Route::resource('/examinations', 'ExaminationController');
+    Route::resource('/rooms', 'RoomController');
+    Route::resource('/wards', 'WardController');
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+

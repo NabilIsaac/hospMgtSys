@@ -2,10 +2,14 @@
 <body>
   
 {{-- navigation --}}
-@include('partials.navigation')
+@if(Request::is('admin*'))
+    @include('partials.navigation')
+@endif
 
 {{-- sidebar --}}
-@include('partials.sidebar')
+@if(Request::is('admin*'))
+    @include('partials.sidebar')
+@endif
 
 {{-- content --}}
 @yield('content')

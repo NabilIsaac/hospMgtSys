@@ -8,6 +8,6 @@ class Ward extends Model
 {
     public function doctor()
     {
-        return $this->belongsTo(\App\Models\Doctor::class, 'id', 'supervisor_id');
+        return $this->belongsTo(\App\Models\Doctor::class, 'supervisor_id', 'id');
     }
 }

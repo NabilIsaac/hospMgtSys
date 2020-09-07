@@ -1,41 +1,39 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Appointment;
-use App\Models\Doctor;
-use App\Models\Patient;
+use App\Http\Controllers\Controller;
+use App\Models\Receptionist;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class AppointmentController extends Controller
+class ReceptionistController extends Controller
 {
 
     protected function validator(Request $request)
     {
         $rules = [
-            'patient_id' => 'required',
-            'doctor_id' => 'required',
-            'appointment_date' => 'required',
+            'name' => 'required|string|max:225',
+            'phone' => 'required',
+            'email' => 'nullable|email|max:64',
+            'brief_history' => 'nullable',
+            'home_address' => 'required',
         ];
 
         return Validator::make($request->all(), $rules, []);
     }
-
-
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $appointments = Appointment::all();
-        $doctors = Doctor::all();
-        $patients = Patient::all();
-        return view('appointments.index', compact('appointments', 'doctors', 'patients'));
+        $receptionists = Receptionist::all();
+        return view('receptionist.index', compact('receptionists'));
     }
 
     /**
@@ -45,10 +43,8 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        $appointments = Appointment::all();
-        $doctors = Doctor::all();
-        $patients = Patient::all();
-        return view('appointments.create', compact('appointments', 'doctors', 'patients'));
+        $receptionists = Receptionist::all();
+        return view('receptionist.create', compact('receptionists'));
     }
 
     /**
@@ -69,20 +65,22 @@ class AppointmentController extends Controller
                 return response($validation->errors(), 400);
             }
 
-            $appointment = new Appointment();
-            $appointment->patient_id = $request->patient_id;
-            $appointment->doctor_id = $request->doctor_id;
-            $appointment->appointment_date = $request->appointment_date;
-            $appointment->save();
+            $receptionist = new Receptionist();
+            $receptionist->name = $request->name;
+            $receptionist->phone = $request->phone;
+            $receptionist->email = $request->email;
+            $receptionist->brief_history = $request->brief_history;
+            $receptionist->home_address = $request->home_address;
+            $receptionist->save();
 
             DB::commit();
-            $request->session()->flash('successful', "New appointment was created successfully!");
-            return redirect()->route('appointments.index');
+            $request->session()->flash('successful', "New Receptionist was created successfully!");
+            return redirect()->route('receptionists.index');
 
         }catch(\Exception $error){
             DB::rollBack();
             return $error;
-            $request->session()->flash('error', "Appointment creation failed!");
+            $request->session()->flash('error', "receptionist creation failed!");
             return redirect()->back();
         } 
     }

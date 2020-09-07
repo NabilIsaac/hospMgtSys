@@ -1,20 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Room;
+use App\Http\Controllers\Controller;
+use App\Models\Drug;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class RoomController extends Controller
+class DrugController extends Controller
 {
 
     protected function validator(Request $request)
     {
         $rules = [
-            'room_type' => 'required',
-            'available' => 'required',
+            'drug_name' => 'required|string|max:225',
+            'drug_brand' => 'required',
+            'description' => 'nullable',
         ];
 
         return Validator::make($request->all(), $rules, []);
@@ -27,8 +29,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
-        return view('room.index', compact('rooms'));
+        $drugs = Drug::all();
+        return view('drugs.index', compact('drugs'));
     }
 
     /**
@@ -38,8 +40,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        $rooms = Room::all();
-        return view('room.create', compact('rooms'));
+        $drugs = Drug::all();
+        return view('drugs.create', compact('drugs'));
     }
 
     /**
@@ -60,19 +62,20 @@ class RoomController extends Controller
                 return response($validation->errors(), 400);
             }
 
-            $room = new Room();
-            $room->room_type = $request->room_type;
-            $room->available = $request->available;
-            $room->save();
+            $drug = new Drug();
+            $drug->drug_name = $request->drug_name;
+            $drug->drug_brand = $request->drug_brand;
+            $drug->description = $request->description;
+            $drug->save();
 
             DB::commit();
-            $request->session()->flash('successful', "New Rooms was created successfully!");
-            return redirect()->route('rooms.index');
+            $request->session()->flash('successful', "New Nurse was created successfully!");
+            return redirect()->route('drugs.index');
 
         }catch(\Exception $error){
             DB::rollBack();
             return $error;
-            $request->session()->flash('error', "Room creation failed!");
+            $request->session()->flash('error', "Nurse creation failed!");
             return redirect()->back();
         } 
     }

@@ -1,24 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Examination;
-use App\Models\Nurse;
+use App\Http\Controllers\Controller;
+use App\Models\Doctor;
+use App\Models\Drug;
 use App\Models\Patient;
+use App\Models\Prescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class ExaminationController extends Controller
+class PrescriptionController extends Controller
 {
 
     protected function validator(Request $request)
     {
         $rules = [
-            'nurse_id' => 'required',
             'patient_id' => 'required',
-            'symptoms' => 'required',
-            'comment' => 'nullable',
+            'doctor_id' => 'required',
+            'drug_id' => 'required',
+            'dose' => 'nullable',
         ];
 
         return Validator::make($request->all(), $rules, []);
@@ -31,10 +33,11 @@ class ExaminationController extends Controller
      */
     public function index()
     {
-        $examinations = Examination::all();
-        $nurses = Nurse::all();
+        $prescriptions = Prescription::all();
+        $doctors = Doctor::all();
         $patients = Patient::all();
-        return view('examination.index', compact('examinations', 'nurses', 'patients'));
+        $drugs = Drug::all();
+        return view('prescription.index', compact('prescriptions', 'doctors', 'patients', 'drugs'));
     }
 
     /**
@@ -44,10 +47,11 @@ class ExaminationController extends Controller
      */
     public function create()
     {
-        $examinations = Examination::all();
-        $nurses = Nurse::all();
+        $prescriptions = Prescription::all();
+        $doctors = Doctor::all();
         $patients = Patient::all();
-        return view('examination.create', compact('examinations', 'nurses', 'patients'));
+        $drugs = Drug::all();
+        return view('prescription.create', compact('prescriptions', 'doctors', 'patients', 'drugs'));
     }
 
     /**
@@ -68,21 +72,21 @@ class ExaminationController extends Controller
                 return response($validation->errors(), 400);
             }
 
-            $examination = new Examination();
-            $examination->patient_id = $request->patient_id;
-            $examination->nurse_id = $request->nurse_id;
-            $examination->symptoms = $request->symptoms;
-            $examination->comment = $request->comment;
-            $examination->save();
+            $prescription = new Prescription();
+            $prescription->patient_id = $request->patient_id;
+            $prescription->doctor_id = $request->doctor_id;
+            $prescription->drug_id = $request->drug_id;
+            $prescription->dose = $request->dose;
+            $prescription->save();
 
             DB::commit();
-            $request->session()->flash('successful', "New examination was created successfully!");
-            return redirect()->route('examinations.index');
+            $request->session()->flash('successful', "New prescription was created successfully!");
+            return redirect()->route('prescriptions.index');
 
         }catch(\Exception $error){
             DB::rollBack();
             return $error;
-            $request->session()->flash('error', "Examination creation failed!");
+            $request->session()->flash('error', "Prescription creation failed!");
             return redirect()->back();
         } 
     }
