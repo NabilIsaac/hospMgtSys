@@ -2,10 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drug;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DrugController extends Controller
 {
+
+    protected function validator(Request $request)
+    {
+        $rules = [
+            'drug_name' => 'required|string|max:225',
+            'drug_brand' => 'required',
+            'description' => 'nullable',
+        ];
+
+        return Validator::make($request->all(), $rules, []);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +28,8 @@ class DrugController extends Controller
      */
     public function index()
     {
-        return view('drug.index');
+        $drugs = Drug::all();
+        return view('drugs.index', compact('drugs'));
     }
 
     /**
@@ -23,7 +39,8 @@ class DrugController extends Controller
      */
     public function create()
     {
-        //
+        $drugs = Drug::all();
+        return view('drugs.create', compact('drugs'));
     }
 
     /**
@@ -34,7 +51,32 @@ class DrugController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            // Start Db transaction
+            DB::beginTransaction();
+
+            // Validate incoming request
+            $validation = $this->validator($request);
+            if ($validation->fails()) {
+                return response($validation->errors(), 400);
+            }
+
+            $drug = new Drug();
+            $drug->drug_name = $request->drug_name;
+            $drug->drug_brand = $request->drug_brand;
+            $drug->description = $request->description;
+            $drug->save();
+
+            DB::commit();
+            $request->session()->flash('successful', "New Nurse was created successfully!");
+            return redirect()->route('drugs.index');
+
+        }catch(\Exception $error){
+            DB::rollBack();
+            return $error;
+            $request->session()->flash('error', "Nurse creation failed!");
+            return redirect()->back();
+        } 
     }
 
     /**
