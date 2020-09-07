@@ -13,13 +13,9 @@
     <div class="top-right">
         <div class="header-menu">
 
-            <div class="header-left">
-               <p> Hello, {{ Auth::user()->name }}</p>
-            </div>
-
             <div class="user-area dropdown float-right">
-                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle" src="{{ asset('assets/images/admin.jpg') }}" alt="User Avatar">
+                <a href="#" class="dropdown-toggle active pt-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <p>{{ Auth::user()->name }}</p>
                 </a>
 
                 <div class="user-menu dropdown-menu">
@@ -27,7 +23,6 @@
                     <a class="nav-link"  href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power -off"></i>Logout</a>
                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none">
                         @csrf
-                        {{route('login')}}
                       </form>
                 </div>
             </div>

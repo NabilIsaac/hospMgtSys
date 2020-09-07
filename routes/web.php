@@ -15,12 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth', 'namespace'=>'admin'], function() {
-    Route::get('/', function () {
-        return redirect()->route('dashboard');
-    });
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('/patients', 'PatientController');
     Route::resource('/nurses', 'NurseController');
@@ -32,6 +31,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth', 'namespace'=>'admin'], fu
     Route::resource('/examinations', 'ExaminationController');
     Route::resource('/rooms', 'RoomController');
     Route::resource('/wards', 'WardController');
+    Route::resource('/users', 'UserController');
     Route::get('/home', 'HomeController@index')->name('home');
 });
 

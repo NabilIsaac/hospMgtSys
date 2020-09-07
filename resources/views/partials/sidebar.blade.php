@@ -35,6 +35,9 @@
                 <li class="{{ (request()->is('admin/examinations*')) ? 'active' : ''  }} ">
                     <a href="{{ route('examinations.index') }}"><i class="menu-icon fa  fa-stethoscope"></i>Examinations </a>
                 </li>
+                <li class="{{ (request()->is('admin/users*')) ? 'active' : ''  }} ">
+                    <a href="{{ route('users.index') }}"><i class="menu-icon fa  fa-user"></i>Users </a>
+                </li>
 
                 {{-- <li class="menu-item-has-children dropdown {{ (request()->is('patients*')) ? 'active' : ''  }} ">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Patients</a>

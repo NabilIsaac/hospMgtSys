@@ -19,10 +19,11 @@ class DashboardController extends Controller
     public function index()
     {
         $patients = Patient::count();
+        $admitants = Patient::all();
         $rooms = Room::count();
         $doctors = Doctor::count();
         $appointments = Appointment::count();
-        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'appointments'));
+        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'appointments', 'admitants'));
     }
 
     /**

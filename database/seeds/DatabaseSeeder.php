@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PrescriptionsTableSeeder::class);
         $this->call(ExaminationsTableSeeder::class);
         $this->call(AppointmentsTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(ModelHasRolesTableSeeder::class);
+        
     }
 }
