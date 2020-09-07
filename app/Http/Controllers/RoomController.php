@@ -2,10 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class RoomController extends Controller
 {
+
+    protected function validator(Request $request)
+    {
+        $rules = [
+            'room_type' => 'required',
+            'available' => 'required',
+        ];
+
+        return Validator::make($request->all(), $rules, []);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +27,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return view('room.index');
+        $rooms = Room::all();
+        return view('room.index', compact('rooms'));
     }
 
     /**
@@ -23,7 +38,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        $rooms = Room::all();
+        return view('room.create', compact('rooms'));
     }
 
     /**
@@ -34,7 +50,31 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            // Start Db transaction
+            DB::beginTransaction();
+
+            // Validate incoming request
+            $validation = $this->validator($request);
+            if ($validation->fails()) {
+                return response($validation->errors(), 400);
+            }
+
+            $room = new Room();
+            $room->room_type = $request->room_type;
+            $room->available = $request->available;
+            $room->save();
+
+            DB::commit();
+            $request->session()->flash('successful', "New Rooms was created successfully!");
+            return redirect()->route('rooms.index');
+
+        }catch(\Exception $error){
+            DB::rollBack();
+            return $error;
+            $request->session()->flash('error', "Room creation failed!");
+            return redirect()->back();
+        } 
     }
 
     /**
