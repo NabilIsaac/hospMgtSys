@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth', 'namespace'=>'admin'], fu
     Route::resource('/rooms', 'RoomController');
     Route::resource('/wards', 'WardController');
     Route::resource('/users', 'UserController');
+    Route::resource('/roles', 'RoleController');
     Route::get('/home', 'HomeController@index')->name('home');
 });
 

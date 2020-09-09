@@ -94,9 +94,9 @@ class ExaminationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Examination $examination)
     {
-        //
+        return view('examination.show', compact('examination'));
     }
 
     /**

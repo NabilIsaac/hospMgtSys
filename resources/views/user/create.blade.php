@@ -27,8 +27,20 @@
 
                     <div class="col-lg-6">
                         <div class="form-group">
+                            <label class=" form-control-label">Role</label>
+                            <select name="roles" class="form-control">
+                                <option> -- Select Role --  </option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}"> {{ $role->name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
                             <label class=" form-control-label">Password</label>
-                            <input type="password" name="password" placeholder="home address" class="form-control shadow-none">
+                            <input type="password" name="password" placeholder="password" class="form-control shadow-none">
                         </div>
                     </div>
                     

@@ -3,35 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
-    protected function validator(Request $request)
-    {
-        $rules = [
-            'name' => 'required|string|max:225',
-            'email' => 'nullable|email|max:64',
-            'password' => 'required|min:6',
-        ];
-
-        return Validator::make($request->all(), $rules, []);
-    }
-    /**
+       /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        //
         $roles = Role::all();
-        $users = User::all();
-        return view('user.index', compact('users'));
+        return view('roles.index', compact('roles'));
     }
 
     /**
@@ -41,8 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('user.create', compact('roles'));
+        return view('roles.create');
     }
 
     /**
@@ -53,34 +39,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         try{
             // Start Db transaction
             DB::beginTransaction();
 
-            // Validate incoming request
-            $validation = $this->validator($request);
-            if ($validation->fails()) {
-                return response($validation->errors(), 400);
-            }
-
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->save();
-
-            $user->assignRole($request->roles);
+            $role = new Role();
+            $role->name = $request->name;
+            $role->guard_name = $request->guard_name;
+            $role->save();
+           
 
             DB::commit();
-            $request->session()->flash('successful', "New user was created successfully!");
-            return redirect()->route('users.index');
+            $request->session()->flash('successful', "New role was created successfully!");
+            return redirect()->route('roles.index');
 
         }catch(\Exception $error){
             DB::rollBack();
             return $error;
-            $request->session()->flash('error', "User creation failed!");
+            $request->session()->flash('error', "Role profile creation failed!");
             return redirect()->back();
-        } 
+        }
+
+
+        return $request;
     }
 
     /**
@@ -89,9 +71,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Role $role)
     {
-        return view('users.show', compact('user'));
+        return view('roles.show', compact('role'));
     }
 
     /**
@@ -100,9 +82,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('roles.edit');
     }
 
     /**
@@ -114,7 +96,29 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            // Start Db transaction
+            DB::beginTransaction();
+
+            $role = Role::find($id);
+            $role->name = $request->name;
+            $role->guard_name = $request->guard_name;
+            $role->save();
+           
+
+            DB::commit();
+            $request->session()->flash('successful', "Role was updated successfully!");
+            return redirect()->route('roles.index');
+
+        }catch(\Exception $error){
+            DB::rollBack();
+            return $error;
+            $request->session()->flash('error', "ROle creation failed!");
+            return redirect()->back();
+        }
+
+
+        return $request;
     }
 
     /**
