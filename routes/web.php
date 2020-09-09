@@ -30,7 +30,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth', 'namespace'=>'admin'], fu
     Route::resource('/receptionists', 'ReceptionistController');
     Route::resource('/doctors', 'DoctorController');
     Route::resource('/examinations', 'ExaminationController');
-    Route::get('/examinations/{examination}', 'ExaminationController@show')->name('exam.show');
     Route::resource('/rooms', 'RoomController');
     Route::resource('/wards', 'WardController');
     Route::resource('/users', 'UserController');

@@ -7,8 +7,10 @@ use App\Models\Examination;
 use App\Models\Nurse;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Traits\HasRoles;
 
 class ExaminationController extends Controller
 {
@@ -16,7 +18,6 @@ class ExaminationController extends Controller
     protected function validator(Request $request)
     {
         $rules = [
-            'nurse_id' => 'required',
             'patient_id' => 'required',
             'symptoms' => 'required',
             'comment' => 'nullable',
@@ -32,7 +33,15 @@ class ExaminationController extends Controller
      */
     public function index()
     {
-        $examinations = Examination::all();
+        $nurseId = Auth::id();
+
+        if (Auth::user()->hasRole('admin')) {
+            $examinations = Examination::all();
+        }elseif(Auth::user()->hasRole('nurse')){
+            $examinations = Examination::where('created_by', $nurseId)->get();
+        }
+
+        // return $nur;
         $nurses = Nurse::all();
         $patients = Patient::all();
         return view('examination.index', compact('examinations', 'nurses', 'patients'));
@@ -71,7 +80,7 @@ class ExaminationController extends Controller
 
             $examination = new Examination();
             $examination->patient_id = $request->patient_id;
-            $examination->nurse_id = $request->nurse_id;
+            $examination->created_by = Auth::user()->id;
             $examination->symptoms = $request->symptoms;
             $examination->comment = $request->comment;
             $examination->save();
@@ -94,9 +103,9 @@ class ExaminationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Examination $examination, Patient $patient)
+    public function show(Examination $examination)
     {
-        return view('examination.show', compact('examination', 'patient'));
+        return view('examination.show', compact('examination'));
     }
 
     /**

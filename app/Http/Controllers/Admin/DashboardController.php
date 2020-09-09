@@ -55,9 +55,11 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Patient $patient, Examination $examination)
     {
-        //
+        // $patient = Patient::findOrfail($id);
+        // $examination = Examination::findOrfail($id);
+        return view('admin.dashboard', compact('patient', 'examination'));
     }
 
     /**

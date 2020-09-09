@@ -16,7 +16,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Fullname</th>
-                                    <th>Phone Number</th>
                                     <th>Email</th>
                                     <th>Role</th>
                                 </tr>
@@ -26,7 +25,6 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td>{{ $user->phone }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->roles->first()->name }}</td>
                                 </tr>

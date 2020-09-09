@@ -16,14 +16,14 @@ class CreateExaminationsTable extends Migration
         Schema::create('examinations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('patient_id');
-            $table->foreignId('nurse_id');
+            $table->foreignId('created_by')->nullable();
             $table->longText('symptoms');
             $table->longText('comment');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
-            $table->foreign('nurse_id')->references('id')->on('nurses')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

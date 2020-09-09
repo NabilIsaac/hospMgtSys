@@ -11,20 +11,7 @@
             <form action="{{ route('examinations.store') }}" method="POST"  class="form-horizontal">
                 @csrf
                 <div class="row">
-                    <div class="col-lg-6">
-                        <label class="form-control-label">Nurse</label>
-                        <select name="nurse_id" class="form-control shadow-none">
-                            <option> Select Nurse  </option>
-                            @foreach ($nurses as $nurse)
-                                <option value="{{ $nurse->id }}"> {{ $nurse->name }} </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('nurse_id'))
-                        <div class="error">
-                            {{ $errors->first('nurse_id') }}
-                        </div>
-                        @endif
-                    </div>
+                    
 
                     <div class="col-lg-6">
                         <label class="form-control-label">Patient</label>

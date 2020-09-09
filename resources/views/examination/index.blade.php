@@ -28,7 +28,7 @@
                                     <td>
                                         <span class="name">{{ $examination->patient->fullname }}</span>
                                     </td>
-                                    <td>{{ $examination->nurse->name }}</td>
+                                    <td>{{ $examination->created_by_name }}</td>
                                     <td>{{ $examination->symptoms }}</td>
                                     <td>{{ $examination->comment }}</td>
                                 </tr>
