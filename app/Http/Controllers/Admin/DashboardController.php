@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Doctor;
+use App\Models\Examination;
 use App\Models\Patient;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -19,11 +20,12 @@ class DashboardController extends Controller
     public function index()
     {
         $patients = Patient::count();
+        $examinations = Examination::all();
         $admitants = Patient::all();
         $rooms = Room::count();
         $doctors = Doctor::count();
         $appointments = Appointment::count();
-        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'appointments', 'admitants'));
+        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'appointments', 'admitants', 'examinations'));
     }
 
     /**

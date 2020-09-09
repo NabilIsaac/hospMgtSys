@@ -14,7 +14,6 @@
                         <table class="table ">
                             <thead>
                                 <tr>
-                                    <th class="serial">#</th>
                                     <th>Patient</th>
                                     <th>Nurse</th>
                                     <th>Symptoms</th>
@@ -22,17 +21,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($examinations as $examination)
                                 <tr>
-                                    <td class="serial">{{ $loop->iteration }}</td>
+                                    
                                     <td>
                                         <span class="name">{{ $examination->patient->fullname }}</span>
-                                    </td>
+                                    </>
                                     <td>{{ $examination->nurse->name }}</td>
                                     <td>{{ $examination->symptoms }}</td>
                                     <td>{{ $examination->comment }}</td>
                                 </tr>
-                               @endforeach
                             </tbody>
                         </table>
                     </div>

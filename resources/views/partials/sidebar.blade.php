@@ -70,14 +70,14 @@
                 <li class="{{ (request()->is('admin/patients*')) ? 'active' : ''  }} ">
                     <a href="{{ route('patients.index') }}"><i class="menu-icon fa fa-wheelchair"></i>Patients </a>
                 </li>
-
+                {{-- @foreach ($examinations as $examination) --}}
                 <li class="{{ (request()->is('admin/examinations*')) ? 'active' : ''  }} ">
-                    <a href="{{ route('examinations.show',$examination->id) }}"><i class="menu-icon fa  fa-stethoscope"></i>Examinations </a>
+                    <a href="{{ route('exam.show',$examination->id) }}"><i class="menu-icon fa  fa-stethoscope"></i>Examinations </a>
                 </li>
-
+                {{-- @endforeach --}}
                 @else
                 <li class="{{ (request()->is('admin/prescriptions*')) ? 'active' : ''  }} ">
-                    <a href="{{ route('prescriptions.show') }}"><i class="menu-icon fa  fa-plus-square"></i>Prescriptions </a>
+                    <a href="{{ route('prescriptions.index') }}"><i class="menu-icon fa  fa-plus-square"></i>Prescriptions </a>
                 </li>
 
                 <li class="{{ (request()->is('admin/appointments*')) ? 'active' : ''  }} ">
