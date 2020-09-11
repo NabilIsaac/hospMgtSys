@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\Nurse;
 use App\Models\Patient;
 use App\Models\Room;
 use App\Models\Ward;
@@ -59,7 +60,8 @@ class PatientController extends Controller
         $doctors = Doctor::all();
         $wards = Ward::all();
         $rooms = Room::all();
-        return view('patient.create', compact('doctors', 'wards', 'rooms'));
+        $nurses = Nurse::all();
+        return view('patient.create', compact('doctors', 'wards', 'rooms', 'nurses'));
     }
 
     /**
