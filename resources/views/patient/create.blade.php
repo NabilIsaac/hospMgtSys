@@ -17,7 +17,7 @@
                             <input type="text" id="text-input" name="fullname" placeholder="full name" class="form-control shadow-none">
                         </div>
                     </div>
-                    @if(Auth::user()->hasRole(['admin']))
+                    @if(Auth::user()->hasRole(['nurse']))
                     <div class="col-lg-6">
                         <label class="form-control-label">Doctor</label>
                         <select name="doctor_id" class="form-control shadow-none">
@@ -33,7 +33,7 @@
                         @endif
                     </div>
                     @endif
-                    @if(Auth::user()->hasRole(['nurse']))
+                    @if(Auth::user()->hasRole(['receptionist']))
                     <div class="col-lg-6">
                         <label class="form-control-label">Nurse</label>
                         <select name="nurse_id" class="form-control shadow-none">
@@ -48,7 +48,8 @@
                         </div>
                         @endif
                     </div>
-                    
+                    @endif
+                    @if(Auth::user()->hasRole(['nurse']))
                     <div class="col-lg-6">
                         <label class="form-control-label">Ward</label>
                         <select name="ward_id" class="form-control shadow-none">
