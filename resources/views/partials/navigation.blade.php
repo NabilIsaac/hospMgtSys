@@ -5,9 +5,10 @@
  <header id="header" class="header">
     <div class="top-left">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ route('dashboard') }}"><img src="{{ asset('assets/images/danlogo.png') }}" alt="Logo"></a>
-            <a class="navbar-brand hidden" href="{{ route('dashboard') }}"><img src="{{ asset('assets/images/logo2.png') }}" alt="Logo"></a>
-            <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+            {{-- <img src="{{ asset('assets/images/logo2.png') }}" alt="Logo"> --}}
+            <a class="navbar-brand" href="{{ route('dashboard') }}">Ravi HMS</a>
+            <a class="navbar-brand hidden" href="{{ route('dashboard') }}"></a>
+            {{-- <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i>Ravi HMS</a> --}}
         </div>
     </div>
     <div class="top-right">

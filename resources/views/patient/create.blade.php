@@ -50,22 +50,7 @@
                     </div>
                     @endif
                     @if(Auth::user()->hasRole(['nurse']))
-                    <div class="col-lg-6">
-                        <label class="form-control-label">Ward</label>
-                        <select name="ward_id" class="form-control shadow-none">
-                            <option> Select Ward  </option>
-                            @foreach ($wards as $ward)
-                                <option value="{{ $ward->id }}"> {{ $ward->name }} </option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('ward_id'))
-                        <div class="error">
-                            {{ $errors->first('ward_id') }}
-                        </div>
-                        @endif
-                    </div>
-                    
-                    <div class="col-lg-6">
+                                     <div class="col-lg-6">
                         <label class="form-control-label">Room</label>
                         <select name="room_id" class="form-control shadow-none">
                             <option> Select Room  </option>
@@ -108,13 +93,6 @@
                             <input type="number" name="age" placeholder="age" class="form-control shadow-none">
                         </div>
                     </div>
-                    
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class=" form-control-label">Created by</label>
-                            <input type="text" name="created_by" placeholder="created by" class="form-control shadow-none">
-                        </div>
-                    </div>
 
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -127,10 +105,10 @@
                         <div class="form-group">
                             <label class=" form-control-label">Status</label>
                             <select name="status" class="form-control">
-                                <option value="admission"> Admission </option>
-                                <option value="discharge"> Discharge </option>
-                                <option value="consultation"> Consultation </option>
-                                <option value="emergency"> Emergency </option>
+                                <option value="Admission"> Admission </option>
+                                <option value="Discharge"> Discharge </option>
+                                <option value="Consultation"> Consultation </option>
+                                <option value="Emergency"> Emergency </option>
                             </select>
                         </div>
                     </div>

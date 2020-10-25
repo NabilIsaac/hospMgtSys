@@ -15,8 +15,8 @@
                             <thead>
                                 <tr>
                                     <th class="serial">#</th>
-                                    <th>Doctor</th>
-                                    <th>Ward</th>
+                                    {{-- <th>Doctor</th> --}}
+                                    {{-- <th>Ward</th> --}}
                                     <th>Room</th>
                                     <th>Full name</th>
                                     <th>Phone</th>
@@ -37,11 +37,11 @@
                                 @foreach ($patients as $patient)
                                 <tr>
                                     <td class="serial">{{ $loop->iteration }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <span class="name">{{ $patient->doctor->name }}</span>
-                                    </td>
-                                    <td> {{ $patient->ward->name }} </td>
-                                    <td>{{ $patient->room->room_type }}</td>
+                                    </td> --}}
+                                    {{-- <td> {{ $patient->ward->name }} </td> --}}
+                                    <td>{{ $patient->room ? $patient->room->room_type : 'No room assigned yet' }}</td>
                                     <td>{{ $patient->fullname }}</td>
                                     <td>{{ $patient->phone }}</td>
                                     <td>
@@ -54,10 +54,10 @@
                                         {{ $patient->age }}
                                     </td>
                                     <td>
-                                        {{ $patient->created_by }}
+                                        {{ $patient->created_by_name  }}
                                     </td>
                                     <td>
-                                        {{ $patient->Insurance }}
+                                        {{ $patient->insurance }}
                                     </td>
                                     <td>
                                         {{ $patient->status }}

@@ -42,9 +42,6 @@
                         <a href="{{ route('wards.index') }}"><i class="menu-icon fa  fa-hospital-o"></i>Wards </a>
                     </li>
 
-                    <li class="{{ (request()->is('admin/examinations*')) ? 'active' : ''  }} ">
-                        <a href="{{ route('examinations.index') }}"><i class="menu-icon fa  fa-stethoscope"></i>Examinations </a>
-                    </li>
                     
                     <li class="{{ (request()->is('admin/users*')) ? 'active' : ''  }} ">
                         <a href="{{ route('users.index') }}"><i class="menu-icon fa  fa-user"></i>Users </a>
@@ -70,9 +67,7 @@
                     <li class="{{ (request()->is('admin/patients*')) ? 'active' : ''  }} ">
                         <a href="{{ route('patients.index') }}"><i class="menu-icon fa fa-wheelchair"></i>Patients </a>
                     </li>
-                    <li class="{{ (request()->is('admin/examinations*')) ? 'active' : ''  }} ">
-                        <a href="{{ route('examinations.index') }}"><i class="menu-icon fa  fa-stethoscope"></i>Examinations </a>
-                    </li>
+                    
                 @else
                     <li class="{{ (request()->is('admin/prescriptions*')) ? 'active' : ''  }} ">
                         <a href="{{ route('prescriptions.index') }}"><i class="menu-icon fa  fa-plus-square"></i>Prescriptions </a>

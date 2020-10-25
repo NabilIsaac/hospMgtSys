@@ -1,22 +1,20 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class DrugsTableSeeder extends Seeder
+class PharmaciesTableSeeder extends Seeder
 {
-
     /**
-     * Auto generated seed file
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
+        DB::table('pharmacies')->delete();
         
-
-        \DB::table('drugs')->delete();
-        
-        \DB::table('drugs')->insert(array (
+        DB::table('pharmacies')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -38,7 +36,5 @@ class DrugsTableSeeder extends Seeder
                 'deleted_at' => NULL,
             ),
         ));
-        
-        
     }
 }

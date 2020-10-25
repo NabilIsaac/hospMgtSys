@@ -24,7 +24,7 @@ class PatientController extends Controller
     protected function validator(Request $request)
     {
         $rules = [
-            'doctor_id' => 'required',
+            // 'doctor_id' => 'required',
             'ward_id' => 'nullable',
             'room_id' => 'nullable',
             'fullname' => 'required|string|max:225',
@@ -32,7 +32,7 @@ class PatientController extends Controller
             'email' => 'nullable|email|max:64',
             'gender' => 'required',
             'age' => 'required',
-            'created_by' => 'required',
+            // 'created_by' => 'required',
             'insurance' => 'required',
             'status' => 'required',
             'next_of_kin' => 'required',
@@ -58,10 +58,10 @@ class PatientController extends Controller
     public function create()
     {
         $doctors = Doctor::all();
-        $wards = Ward::all();
+        // $wards = Ward::all();
         $rooms = Room::all();
         $nurses = Nurse::all();
-        return view('patient.create', compact('doctors', 'wards', 'rooms', 'nurses'));
+        return view('patient.create', compact('doctors', 'rooms', 'nurses'));
     }
 
     /**
@@ -84,15 +84,15 @@ class PatientController extends Controller
 
             $patient = new Patient();
             $patient->fullname = $request->fullname;
-            $patient->doctor_id = $request->doctor_id;
-            $patient->ward_id = $request->ward_id;
+            // $patient->doctor_id = $request->doctor_id;
+            // $patient->ward_id = $request->ward_id;
             $patient->room_id = $request->room_id;
             $patient->phone = $request->phone;
             $patient->status = $request->status;
             $patient->email = $request->email;
             $patient->gender = $request->gender;
             $patient->age = $request->age;
-            $patient->created_by = $request->created_by;
+            $patient->created_by = auth()->user()->id;
             $patient->insurance = $request->insurance;
             $patient->next_of_kin = $request->next_of_kin;
             $patient->marital_status = $request->marital_status;
@@ -100,7 +100,7 @@ class PatientController extends Controller
             $patient->home_address = $request->home_address;
             $patient->save();
 
-            DB::commit();
+            // $patient->doctor_patient()->attach($patient->id);
 
             DB::commit();
             $request->session()->flash('successful', "New patient was created successfully!");

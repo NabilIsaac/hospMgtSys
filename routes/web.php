@@ -29,7 +29,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth', 'namespace'=>'admin'], fu
     Route::resource('/prescriptions', 'PrescriptionController');
     Route::resource('/receptionists', 'ReceptionistController');
     Route::resource('/doctors', 'DoctorController');
-    Route::resource('/examinations', 'ExaminationController');
     Route::resource('/rooms', 'RoomController');
     Route::resource('/wards', 'WardController');
     Route::resource('/users', 'UserController');

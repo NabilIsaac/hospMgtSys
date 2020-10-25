@@ -10,4 +10,9 @@ class Doctor extends Model
     {
         return $this->belongsTo(\App\Models\DoctorType::class);
     }
+
+    public function patients()
+    {
+        return $this->hasMany(\App\Models\Patient::class);
+    }
 }

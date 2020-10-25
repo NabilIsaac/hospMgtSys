@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class AppointmentsTableSeeder extends Seeder
+class RecordsTableSeeder extends Seeder
 {
 
     /**
@@ -14,9 +15,9 @@ class AppointmentsTableSeeder extends Seeder
     {
         
 
-        \DB::table('appointments')->delete();
+        DB::table('records')->delete();
         
-        \DB::table('appointments')->insert(array (
+        DB::table('records')->insert(array (
             0 => 
             array (
                 'id' => 1,

@@ -4,13 +4,13 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card bg-warning">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <h4 class="text-center pb-5 pt-3">Unauthorized access not permitted, contact admin for access</h4>
+                        <h4 class="text-center pb-5 pt-3">Ravi Hospital Management System</h4>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

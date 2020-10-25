@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Doctor;
-use App\Models\Examination;
 use App\Models\Patient;
+use App\Models\Record;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -20,12 +20,11 @@ class DashboardController extends Controller
     public function index()
     {
         $patients = Patient::count();
-        $examinations = Examination::all();
         $admitants = Patient::all();
         $rooms = Room::count();
         $doctors = Doctor::count();
-        $appointments = Appointment::count();
-        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'appointments', 'admitants', 'examinations'));
+        $appointments = Record::count();
+        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'appointments', 'admitants'));
     }
 
     /**
@@ -55,11 +54,10 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient, Examination $examination)
+    public function show(Patient $patient)
     {
         // $patient = Patient::findOrfail($id);
-        // $examination = Examination::findOrfail($id);
-        return view('admin.dashboard', compact('patient', 'examination'));
+        return view('admin.dashboard', compact('patient'));
     }
 
     /**

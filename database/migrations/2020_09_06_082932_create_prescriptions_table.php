@@ -24,7 +24,7 @@ class CreatePrescriptionsTable extends Migration
 
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
-            $table->foreign('drug_id')->references('id')->on('drugs')->onDelete('cascade');
+            $table->foreign('drug_id')->references('id')->on('pharmacies')->onDelete('cascade');
         });
     }
 

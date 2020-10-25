@@ -6,9 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
-    public function doctor()
+
+    public function getCreatedByNameAttribute()
     {
-        return $this->belongsTo(\App\Models\Doctor::class);
+        return User::where('id', $this->created_by)->pluck('name')->first();
+    }
+
+    public function doctor_patient()
+    {
+        return $this->belongsTo(\App\Models\DoctorPatient::class);
     }
 
     public function ward()

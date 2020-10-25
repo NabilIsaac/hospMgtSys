@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWardsTable extends Migration
+class CreatePharmaciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateWardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('wards', function (Blueprint $table) {
+        Schema::create('pharmacies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('supervisor_id')->nullable();
-            $table->string('block_name');
-            $table->string('no_of_rooms');
+            $table->string('drug_name');
+            $table->string('drug_brand');
+            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('supervisor_id')->references('id')->on('doctors')->onDelete('cascade');
         });
     }
 
@@ -33,6 +30,6 @@ class CreateWardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wards');
+        Schema::dropIfExists('pharmacies');
     }
 }
