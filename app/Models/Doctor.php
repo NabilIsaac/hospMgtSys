@@ -13,6 +13,6 @@ class Doctor extends Model
 
     public function patients()
     {
-        return $this->hasMany(\App\Models\Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class, 'patient_id');
     }
 }

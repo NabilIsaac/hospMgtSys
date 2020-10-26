@@ -12,15 +12,16 @@ class Patient extends Model
         return User::where('id', $this->created_by)->pluck('name')->first();
     }
 
-    public function doctor_patient()
+    public function doctor()
     {
-        return $this->belongsTo(\App\Models\DoctorPatient::class);
+        return $this->hasMany(\App\Models\DoctorPatient::class, 'doctor_id');
     }
 
-    public function ward()
+    public function nurse()
     {
-        return $this->belongsTo(\App\Models\Ward::class);
+        return $this->hasMany(\App\Models\PatientNurse::class, 'nurse_id');
     }
+
 
     public function room()
     {

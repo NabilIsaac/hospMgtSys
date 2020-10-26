@@ -100,7 +100,14 @@ class PatientController extends Controller
             $patient->home_address = $request->home_address;
             $patient->save();
 
-            // $patient->doctor_patient()->attach($patient->id);
+            if(Auth::user()->hasRole('nurse')){
+                $patient->doctor()->attach($patient->id);
+            }
+
+            if(Auth::user()->hasRole('receptionist')){
+                $patient->nurse()->attach($patient->id);
+            }
+            
 
             DB::commit();
             $request->session()->flash('successful', "New patient was created successfully!");
