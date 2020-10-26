@@ -45,8 +45,8 @@
                         <label class="form-control-label">Drug</label>
                         <select name="drug_id" class="form-control shadow-none">
                             <option> Select Drug  </option>
-                            @foreach ($drugs as $drug)
-                                <option value="{{ $drug->id }}"> {{ $drug->drug_name }} </option>
+                            @foreach ($pharmacies as $pharmacy)
+                                <option value="{{ $pharmacy->id }}"> {{ $pharmacy->drug_name }} </option>
                             @endforeach
                         </select>
                         @if ($errors->has('drug_id'))

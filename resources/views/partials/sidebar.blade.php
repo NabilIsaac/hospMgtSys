@@ -22,34 +22,34 @@
                         <a href="{{ route('nurses.index') }}"><i class="menu-icon fa fa-user"></i>Nurses </a>
                     </li>
                     
-                    <li class="{{ (request()->is('admin/drugs*')) ? 'active' : ''  }} ">
-                        <a href="{{ route('drugs.index') }}"><i class="menu-icon fa fa-medkit"></i>Drugs </a>
+                    <li class="{{ (request()->is('admin/pharmacies*')) ? 'active' : ''  }} ">
+                        <a href="{{ route('pharmacies.index') }}"><i class="menu-icon fa fa-medkit"></i>Pharmacy </a>
                     </li>
 
                     <li class="{{ (request()->is('admin/prescriptions*')) ? 'active' : ''  }} ">
                         <a href="{{ route('prescriptions.index') }}"><i class="menu-icon fa  fa-plus-square"></i>Prescriptions </a>
                     </li>
 
-                    <li class="{{ (request()->is('admin/appointments*')) ? 'active' : ''  }} ">
-                        <a href="{{ route('appointments.index') }}"><i class="menu-icon fa  fa-comment"></i>Appointments </a>
+                    <li class="{{ (request()->is('admin/records*')) ? 'active' : ''  }} ">
+                        <a href="{{ route('records.index') }}"><i class="menu-icon fa  fa-comment"></i>Records </a>
                     </li>
 
                     <li class="{{ (request()->is('admin/rooms*')) ? 'active' : ''  }} ">
                         <a href="{{ route('rooms.index') }}"><i class="menu-icon fa  fa-home"></i>Rooms </a>
                     </li>
 
-                    <li class="{{ (request()->is('admin/wards*')) ? 'active' : ''  }} ">
+                    {{-- <li class="{{ (request()->is('admin/wards*')) ? 'active' : ''  }} ">
                         <a href="{{ route('wards.index') }}"><i class="menu-icon fa  fa-hospital-o"></i>Wards </a>
-                    </li>
+                    </li> --}}
 
                     
                     <li class="{{ (request()->is('admin/users*')) ? 'active' : ''  }} ">
                         <a href="{{ route('users.index') }}"><i class="menu-icon fa  fa-user"></i>Users </a>
                     </li>
 
-                    <li class="{{ (request()->is('admin/roles*')) ? 'active' : ''  }} ">
+                    {{-- <li class="{{ (request()->is('admin/roles*')) ? 'active' : ''  }} ">
                         <a href="{{ route('roles.index') }}"><i class="menu-icon fa  fa-user"></i>Roles </a>
-                    </li>
+                    </li> --}}
                 @elseif(Auth::user()->hasRole(['receptionist']))
                     <li class="{{ (request()->is('admin/dashboard*')) ? 'active' : ''  }} ">
                         <a href="{{ route('dashboard') }}"><i class="menu-icon fa fa-bars"></i>Dashboard </a>
@@ -73,8 +73,8 @@
                         <a href="{{ route('prescriptions.index') }}"><i class="menu-icon fa  fa-plus-square"></i>Prescriptions </a>
                     </li>
 
-                    <li class="{{ (request()->is('admin/appointments*')) ? 'active' : ''  }} ">
-                        <a href="{{ route('appointments.show') }}"><i class="menu-icon fa  fa-comment"></i>Appointments </a>
+                    <li class="{{ (request()->is('admin/records*')) ? 'active' : ''  }} ">
+                        <a href="{{ route('records.show') }}"><i class="menu-icon fa  fa-comment"></i>Records </a>
                     </li>
 
                 @endif

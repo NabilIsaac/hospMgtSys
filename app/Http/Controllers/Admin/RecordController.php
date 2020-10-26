@@ -3,24 +3,29 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Drug;
+use App\Models\Appointment;
+use App\Models\Doctor;
+use App\Models\Patient;
+use App\Models\Record;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class DrugController extends Controller
+class RecordController extends Controller
 {
 
     protected function validator(Request $request)
     {
         $rules = [
-            'drug_name' => 'required|string|max:225',
-            'drug_brand' => 'required',
-            'description' => 'nullable',
+            'patient_id' => 'required',
+            'doctor_id' => 'required',
+            'appointment_date' => 'required',
         ];
 
         return Validator::make($request->all(), $rules, []);
     }
+
 
     /**
      * Display a listing of the resource.
@@ -29,8 +34,10 @@ class DrugController extends Controller
      */
     public function index()
     {
-        $drugs = Drug::all();
-        return view('drugs.index', compact('drugs'));
+        $records = Record::all();
+        $doctors = Doctor::all();
+        $patients = Patient::all();
+        return view('appointments.index', compact('records', 'doctors', 'patients'));
     }
 
     /**
@@ -40,8 +47,10 @@ class DrugController extends Controller
      */
     public function create()
     {
-        $drugs = Drug::all();
-        return view('drugs.create', compact('drugs'));
+        $records = Record::all();
+        $doctors = Doctor::all();
+        $patients = Patient::all();
+        return view('appointments.create', compact('records', 'doctors', 'patients'));
     }
 
     /**
@@ -62,20 +71,20 @@ class DrugController extends Controller
                 return response($validation->errors(), 400);
             }
 
-            $drug = new Drug();
-            $drug->drug_name = $request->drug_name;
-            $drug->drug_brand = $request->drug_brand;
-            $drug->description = $request->description;
-            $drug->save();
+            $appointment = new Record();
+            $appointment->patient_id = $request->patient_id;
+            $appointment->doctor_id = $request->doctor_id;
+            $appointment->appointment_date = $request->appointment_date;
+            $appointment->save();
 
             DB::commit();
-            $request->session()->flash('successful', "New Nurse was created successfully!");
-            return redirect()->route('drugs.index');
+            $request->session()->flash('successful', "New appointment was created successfully!");
+            return redirect()->route('appointments.index');
 
         }catch(\Exception $error){
             DB::rollBack();
             return $error;
-            $request->session()->flash('error', "Nurse creation failed!");
+            $request->session()->flash('error', "Appointment creation failed!");
             return redirect()->back();
         } 
     }

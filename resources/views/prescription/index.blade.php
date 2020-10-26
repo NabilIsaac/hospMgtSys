@@ -30,7 +30,7 @@
                                         <span class="name">{{ $prescription->doctor->name }}</span>
                                     </td>
                                     <td>{{ $prescription->patient->fullname }}</td>
-                                    <td>{{ $prescription->drug->drug_name }}</td>
+                                    <td>{{ $prescription->pharmacy->drug_name }}</td>
                                     <td>{{ $prescription->dose }}</td>
                                     <td>{{ $prescription->created_at }}</td>
                                 </tr>

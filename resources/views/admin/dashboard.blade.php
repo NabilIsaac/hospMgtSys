@@ -54,8 +54,8 @@
                                 </div>
                                 <div class="stat-content">
                                     <div class="text-left dib">
-                                        <div class="stat-text"><span class="count">{{ $appointments }}</span></div>
-                                        <div class="stat-heading">Appointments</div>
+                                        <div class="stat-text"><span class="count">{{ $records }}</span></div>
+                                        <div class="stat-heading">Records</div>
                                     </div>
                                 </div>
                             </div>

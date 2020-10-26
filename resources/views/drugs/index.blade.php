@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title">Drugs</strong>
-                        <a href="{{ route('drugs.create') }}" class="btn btn-sm btn-primary float-right">Create Drug</a>
+                        <a href="{{ route('pharmacies.create') }}" class="btn btn-sm btn-primary float-right">Create Drug</a>
                     </div>
                     <div class="table-stats order-table ov-h">
                         <table class="table ">
@@ -21,14 +21,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($drugs as $drug)
+                                @foreach ($pharmacies as $pharmacy)
                                 <tr>
                                     <td class="serial">{{ $loop->iteration }}</td>
                                     <td>
-                                        <span class="name">{{ $drug->drug_name }}</span>
+                                        <span class="name">{{ $pharmacy->drug_name }}</span>
                                     </td>
-                                    <td>{{ $drug->drug_brand }}</td>
-                                    <td>{{ $drug->description }}</td>
+                                    <td>{{ $pharmacy->drug_brand }}</td>
+                                    <td>{{ $pharmacy->description }}</td>
                                 </tr>
                                @endforeach
                             </tbody>

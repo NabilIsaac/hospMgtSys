@@ -7,8 +7,8 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Appointments</strong>
-                        <a href="{{ route('appointments.create') }}" class="btn btn-sm btn-primary float-right">Create Appointment</a>
+                        <strong class="card-title">Records</strong>
+                        <a href="{{ route('records.create') }}" class="btn btn-sm btn-primary float-right">Create Appointment</a>
                     </div>
                     <div class="table-stats order-table ov-h">
                         <table class="table ">
@@ -22,15 +22,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($appointments as $appointment)
+                                @foreach ($records as $record)
                                 <tr>
                                     <td class="serial">{{ $loop->iteration }}</td>
                                     <td>
-                                        <span class="name">{{ $appointment->doctor->name }}</span>
+                                        <span class="name">{{ $record->doctor->name }}</span>
                                     </td>
-                                    <td>{{ $appointment->patient->fullname }}</td>
-                                    <td>{{ $appointment->appointment_date }}</td>
-                                    <td>{{ $appointment->created_at }}</td>
+                                    <td>{{ $record->patient->fullname }}</td>
+                                    <td>{{ $record->appointment_date }}</td>
+                                    <td>{{ $record->created_at }}</td>
                                 </tr>
                                @endforeach
                             </tbody>

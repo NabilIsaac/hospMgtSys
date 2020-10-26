@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
-use App\Models\Drug;
 use App\Models\Patient;
+use App\Models\Pharmacy;
 use App\Models\Prescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,8 +36,8 @@ class PrescriptionController extends Controller
         $prescriptions = Prescription::all();
         $doctors = Doctor::all();
         $patients = Patient::all();
-        $drugs = Drug::all();
-        return view('prescription.index', compact('prescriptions', 'doctors', 'patients', 'drugs'));
+        $pharmacies = Pharmacy::all();
+        return view('prescription.index', compact('prescriptions', 'doctors', 'patients', 'pharmacies'));
     }
 
     /**
@@ -50,8 +50,8 @@ class PrescriptionController extends Controller
         $prescriptions = Prescription::all();
         $doctors = Doctor::all();
         $patients = Patient::all();
-        $drugs = Drug::all();
-        return view('prescription.create', compact('prescriptions', 'doctors', 'patients', 'drugs'));
+        $pharmacies = Pharmacy::all();
+        return view('prescription.create', compact('prescriptions', 'doctors', 'patients', 'pharmacies'));
     }
 
     /**

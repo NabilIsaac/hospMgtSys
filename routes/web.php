@@ -24,13 +24,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth', 'namespace'=>'admin'], fu
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('/patients', 'PatientController');
     Route::resource('/nurses', 'NurseController');
-    Route::resource('/drugs', 'DrugController');
-    Route::resource('/appointments', 'AppointmentController');
+    Route::resource('/pharmacies', 'PharmacyController');
+    Route::resource('/records', 'RecordController');
     Route::resource('/prescriptions', 'PrescriptionController');
     Route::resource('/receptionists', 'ReceptionistController');
     Route::resource('/doctors', 'DoctorController');
     Route::resource('/rooms', 'RoomController');
-    Route::resource('/wards', 'WardController');
     Route::resource('/users', 'UserController');
     Route::resource('/roles', 'RoleController');
     Route::get('/home', 'HomeController@index')->name('home');

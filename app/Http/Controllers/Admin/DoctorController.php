@@ -79,8 +79,6 @@ class DoctorController extends Controller
             $doctor->save();
 
             DB::commit();
-
-            DB::commit();
             $request->session()->flash('successful', "New doctor was created successfully!");
             return redirect()->route('doctors.index');
 

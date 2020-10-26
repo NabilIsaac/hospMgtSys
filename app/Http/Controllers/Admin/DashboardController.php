@@ -23,8 +23,8 @@ class DashboardController extends Controller
         $admitants = Patient::all();
         $rooms = Room::count();
         $doctors = Doctor::count();
-        $appointments = Record::count();
-        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'appointments', 'admitants'));
+        $records = Record::count();
+        return view('admin.dashboard', compact('patients', 'rooms', 'doctors', 'records', 'admitants'));
     }
 
     /**
